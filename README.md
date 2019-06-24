@@ -5,6 +5,7 @@ at the top level, it shows the band record label, below that it lists out all ba
 
 For example:
 
+```
 Record Label 1
     Band X
         Omega Festival
@@ -13,7 +14,7 @@ Record Label 2
     Band A
         Alpha Festival
         Beta Festival
-
+```
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.4 Node version 10.15.3 and NPM version 6.4.1
 
 ## Prerequisites
