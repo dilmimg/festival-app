@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="mt-3"></div>
+  <h1>Music festivals by record label and band</h1>
+  <div *ngIf="isError" class="alert alert-warning" role="alert">
+      Music festival list is unavailable now. Please try again later.
+    </div>
+<ng-container *ngIf="recordLabels.length > 0">
+  <div *ngFor="let record of recordLabels; let i = index;" class="col-md-6">
+    <div class="text-primary pt-4" *ngIf="(i === 0 || i > 0 && record.rlabel !== recordLabels[i-1].rlabel)">{{record.rlabel}}</div>
+    <div class="text-success pl-3" *ngIf="(i === 0 || i > 0 && record.band !== recordLabels[i-1].band)">{{record.band}}</div>
+    <div class="text-secondary pl-5">{{record.festival}}</div>
+  </div>  
+</ng-container>
+</div>
