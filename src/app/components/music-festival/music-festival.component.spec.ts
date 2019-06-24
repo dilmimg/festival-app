@@ -30,8 +30,8 @@ describe('MusicFestivalComponent', () => {
   it('should render title in a h1 tag', () => {
     fixture = TestBed.createComponent(MusicFestivalComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Music festivals by record label and band');
+    const element = fixture.debugElement.nativeElement;
+    expect(element.querySelector('h1').textContent).toContain('Music festivals by record label and band');
   });
 
   it('should render music festival data', fakeAsync(() => {
@@ -56,8 +56,7 @@ describe('MusicFestivalComponent', () => {
     fixture.detectChanges();
     expect(component.recordLabels.length).toEqual(1);
 
-    const compiled = fixture.debugElement;
-    const div = compiled.query(By.css('.text-primary')).nativeElement;
-    expect(div.textContent).toEqual('XS Recordings');
+    const element = fixture.debugElement.query(By.css('.text-primary')).nativeElement;
+    expect(element.textContent).toEqual('XS Recordings');
   }));
 });
