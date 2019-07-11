@@ -9,7 +9,7 @@ import { sortBy } from 'lodash';
 })
 export class MusicFestivalComponent implements OnInit {
 
-  recordLabels: any[] = new Array<any>();
+  recordLabels: any[];
   isError = false;
 
   constructor(private dataService: DataService) { }
@@ -31,11 +31,12 @@ export class MusicFestivalComponent implements OnInit {
   }
 
   arrangeData(festivals: MusicFestival[]) {
+    const recordLabelArr = new Array<any>();
     festivals.forEach(f => {
       const recordArr = f.bands.map(b => ({rlabel: (b.recordLabel ? b.recordLabel : 'Unknown'), band: b.name, festival: f.name }));
-      this.recordLabels.push(...recordArr);
+      recordLabelArr.push(...recordArr);
     });
 
-   this.recordLabels = sortBy(this.recordLabels, ['rlabel', 'band', 'festival']);
+   this.recordLabels = sortBy(recordLabelArr, ['rlabel', 'band', 'festival']);
   }
 }
