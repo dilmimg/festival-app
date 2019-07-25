@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClientTestingModule} from '@angular/common/http/testing';
 import { MusicFestivalComponent } from './music-festival.component';
-import { DataService } from 'src/app/services/data.service';
+import { MusicFestivalService } from 'src/app/services/music-festival.service';
 import { Observable, Observer } from 'rxjs';
 import { By } from '@angular/platform-browser';
 
@@ -31,11 +31,11 @@ describe('MusicFestivalComponent', () => {
     fixture = TestBed.createComponent(MusicFestivalComponent);
     fixture.detectChanges();
     const element = fixture.debugElement.nativeElement;
-    expect(element.querySelector('h1').textContent).toContain('Music festivals by record label and band');
+    expect(element.querySelector('h1').textContent).toContain('Music Festivals by Record Label and Band');
   });
 
   it('should render music festival data', fakeAsync(() => {
-    const asyncDataService = fixture.debugElement.injector.get(DataService);
+    const asyncDataService = fixture.debugElement.injector.get(MusicFestivalService);
     const mockFestival = [{
       'name': 'LOL-palooza',
       'bands': [{
@@ -56,7 +56,7 @@ describe('MusicFestivalComponent', () => {
     fixture.detectChanges();
     expect(component.recordLabels.length).toEqual(1);
 
-    const element = fixture.debugElement.query(By.css('.text-primary')).nativeElement;
+    const element = fixture.debugElement.query(By.css('.text-primary.pt-4')).nativeElement;
     expect(element.textContent).toEqual('XS Recordings');
   }));
 });

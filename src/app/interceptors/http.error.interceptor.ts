@@ -13,7 +13,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
        retry(1),
        catchError((error: HttpErrorResponse) => {
          if (error.status === 429) {
-           // TODO : handle 429 response
+           // TODO : Create an alert service to display a message to the user
             console.log('Too many requests!');
          }
            return throwError(error);

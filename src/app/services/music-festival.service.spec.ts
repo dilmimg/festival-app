@@ -1,32 +1,32 @@
 import { TestBed } from '@angular/core/testing';
-import { DataService } from './data.service';
+import { MusicFestivalService } from './music-festival.service';
 import { HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
-describe('DataService', () => {
+describe('MusicFestivalService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
   }));
 
   function setup() {
-    const dataService = TestBed.get(DataService);
+    const musicFestivalService = TestBed.get(MusicFestivalService);
     const httpTestingController = TestBed.get(HttpTestingController);
-    return { dataService, httpTestingController };
+    return { musicFestivalService, httpTestingController };
   }
 
   it('should be created', () => {
-    const { dataService } = setup();
-    expect(dataService).toBeTruthy();
+    const { musicFestivalService } = setup();
+    expect(musicFestivalService).toBeTruthy();
   });
 
   it('should fetch music festival data', () => {
-    const { dataService, httpTestingController } = setup();
+    const { musicFestivalService, httpTestingController } = setup();
     const mockFestival = [{
       'name': 'LOL-palooza',
       'bands': [{
           'name': 'Winter Primates',
           'recordLabel': 'XS Recordings'
       }]}];
-      dataService.getMusicFestivals().subscribe(res => {
+      musicFestivalService.getMusicFestivals().subscribe(res => {
       expect(res).toEqual(mockFestival);
     });
 

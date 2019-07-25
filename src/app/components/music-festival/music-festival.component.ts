@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { MusicFestivalService } from 'src/app/services/music-festival.service';
 import { MusicFestival } from 'src/app/models/music.festival';
 import { sortBy } from 'lodash';
 
@@ -12,29 +12,30 @@ export class MusicFestivalComponent implements OnInit {
   recordLabels: any[];
   isError = false;
 
-  constructor(private dataService: DataService) { }
+  constructor(private musicFestivalService: MusicFestivalService) { }
 
   ngOnInit() {
     this.getFestivals();
   }
 
   getFestivals() {
-    this.dataService.getMusicFestivals().subscribe(festivals => {
+    this.musicFestivalService.getMusicFestivals().subscribe(festivals => {
       if (!festivals || festivals.length === 0) {
         this.isError = true;
         return;
       }
-      this.arrangeData(festivals);
+      this.arrangeMusicFestivals(festivals);
     }, error => {
       this.isError = true;
     });
   }
 
-  arrangeData(festivals: MusicFestival[]) {
-    const recordLabelArr = new Array<any>();
-    festivals.forEach(f => {
-      const recordArr = f.bands.map(b => ({rlabel: (b.recordLabel ? b.recordLabel : 'Unknown'), band: b.name, festival: f.name }));
-      recordLabelArr.push(...recordArr);
+  arrangeMusicFestivals(festivals: MusicFestival[]) {
+    let recordLabelArr = new Array<any>();
+    recordLabelArr = festivals.map(f => {
+      return f.bands.map(b => ({rlabel: (b.recordLabel ? b.recordLabel : 'Unknown'), band: b.name, festival: f.name }));
+    }).reduce((f1, f2) => {
+      return f1.concat(f2);
     });
 
    this.recordLabels = sortBy(recordLabelArr, ['rlabel', 'band', 'festival']);
